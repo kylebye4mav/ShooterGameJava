@@ -2,9 +2,18 @@ package byekv1.game;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.math.Vector2;
 
 public class InputHandler implements InputProcessor {
 
+    /**
+     * MOUSE STATES
+     */
+    static Vector2 MOUSE_POS = new Vector2();
+    static boolean LEFTMOUSE_PRESSED = false;
+    static boolean RIGHTMOUSE_PRESSED = false;
+    static boolean LEFTMOUSE_DOWN = false;
+    static boolean RIGHTMOUSE_DOWN = false;
 
     /*
      * PRESSED STATES
@@ -39,6 +48,9 @@ public class InputHandler implements InputProcessor {
     }
 
     static void resetStates() {
+
+        LEFTMOUSE_PRESSED = false;
+        RIGHTMOUSE_PRESSED = false;
 
         W_PRESSED = false;
         A_PRESSED = false;
@@ -131,7 +143,7 @@ public class InputHandler implements InputProcessor {
 
         }
 
-        return false;
+        return true;
     }
 
     @Override
@@ -142,14 +154,42 @@ public class InputHandler implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        // TODO Auto-generated method stub
-        return false;
+        
+        switch(button) {
+            
+            case Input.Buttons.LEFT:
+                LEFTMOUSE_DOWN = true;
+                LEFTMOUSE_PRESSED = true;
+                break;
+
+            case Input.Buttons.RIGHT:
+                RIGHTMOUSE_DOWN = true;
+                RIGHTMOUSE_PRESSED = true;
+                break;
+
+        }
+
+        return true;
+
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        // TODO Auto-generated method stub
-        return false;
+        
+        switch(button) {
+            
+            case Input.Buttons.LEFT:
+                LEFTMOUSE_DOWN = false;
+                break;
+
+            case Input.Buttons.RIGHT:
+                RIGHTMOUSE_DOWN = false;
+                break;
+
+        }
+
+        return true;
+
     }
 
     @Override
@@ -160,8 +200,10 @@ public class InputHandler implements InputProcessor {
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
-        // TODO Auto-generated method stub
-        return false;
+        
+        MOUSE_POS.set(screenX, screenY);
+
+        return true;
     }
 
     @Override

@@ -21,6 +21,7 @@ public class ShooterGameJava extends ApplicationAdapter {
 	@Override
 	public void render () {
 		handleInput();
+		System.out.format("X: %.2f; Y: %.2f \n", InputHandler.MOUSE_POS.x, InputHandler.MOUSE_POS.x);
 		ScreenUtils.clear(1, 0, 0, 1);
 		batch.begin();
 		img.draw((Batch)batch, 1.0f);
@@ -35,6 +36,12 @@ public class ShooterGameJava extends ApplicationAdapter {
 		}
 		if (InputHandler.S_PRESSED) {
 			img.moveBy(0.f, -5.f);
+		}
+		if (InputHandler.LEFTMOUSE_PRESSED) {
+			img.moveBy(5f, 0.f);
+		}
+		if (InputHandler.RIGHTMOUSE_DOWN) {
+			img.moveBy(-5f, 0.f);
 		}
 	}
 	
